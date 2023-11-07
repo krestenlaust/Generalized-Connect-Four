@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stdbool.h"
 
 /**
@@ -15,3 +16,5 @@ struct game_settings get_settings_scan_console(void);
 // Examples of expansion
 //struct game_settings get_settings_args(void);
 //struct game_settings get_settings_file(void);
+
+char* format_settings(struct game_settings settings);
