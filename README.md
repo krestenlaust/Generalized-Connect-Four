@@ -24,7 +24,7 @@ Du får brug for følgende funktioner:
 
 I filen [src/play_game.c](src/play_game.c) er der lavet en lille skabelon til den overordnede struktur af programmet - dette kan du frit benytte, ændre eller ignorere.
 Det er oplagt at implementere funktionerne i et programbibliotek ved at definere prototyper i [src/game_of_lines.h](src/game_of_lines.h) og implementere funktionerne i [src/game_of_lines.c](src/game_of_lines.c). 
-Det er også oplagt at teste funktionerne med unit test i [test/test_game_of_lines.c](test/test_game_of_lines.c). 
+Det er også oplagt at teste funktionerne med unit test i [test/test_game_of_lines.c](test/game_of_lines/test_game_of_lines.c). 
 
 Her er et eksempel på en dialog med spillet - som dialogen kan se ud når du får skrevet dit program:
 

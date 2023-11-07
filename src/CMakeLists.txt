@@ -1,6 +1,19 @@
 
 # We create a library for the functions in our game
-add_library(game_of_lines game_of_lines.c)
+add_library(game_of_lines
+        settings.c
+        settings.h
+        game_checkers.c
+        game_checkers.h
+        game_visualizer.c
+        game_visualizer.h
+)
+
+add_library(player_types
+        player_types.c
+        player_types.h
+)
+
 # Make header files in the current folder for #include
 target_include_directories(game_of_lines PUBLIC .)
 

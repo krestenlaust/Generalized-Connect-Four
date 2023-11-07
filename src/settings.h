@@ -1,0 +1,3 @@
+struct game_settings {
+
+};
