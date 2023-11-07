@@ -1,22 +1,26 @@
 #include "settings.h"
 
 struct game_settings get_settings_scan_console(void){
-    char scan_ai_opponent = 'Y';
-    printf("Play against computer ([y]/n)> ");
-    scanf(" %c", &scan_ai_opponent);
+    char scan_ai_opponent;
+    printf("Play against computer [Y/n]>");
+    scanf("%c", &scan_ai_opponent);
+    // Default to Yes.
+    if (scan_ai_opponent == '\r' || scan_ai_opponent == '\n'){
+        scan_ai_opponent = 'y';
+    }
 
     bool ai_opponent = scan_ai_opponent == 'Y' || scan_ai_opponent == 'y';
 
     int game_size_width;
-    printf("Game size width> ");
+    printf("Game size width>");
     scanf("%d", &game_size_width);
 
     int game_size_height;
-    printf("Game size height> ");
+    printf("Game size height>");
     scanf("%d", &game_size_height);
 
     int line_size;
-    printf("Line size> ");
+    printf("Line size>");
     scanf("%d", &line_size);
 
     struct game_settings scanned_settings = {
