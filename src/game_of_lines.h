@@ -7,7 +7,17 @@ struct board{
     int* cells;
 };
 
+/**
+ * Allocates a board instance, and its cells.
+ * @param width The width of the board.
+ * @param height The height of the board.
+ * @return Reference to the newly allocated board.
+ */
 struct board* initialize_board(int width, int height);
+/**
+ * Deallocates the cells, and the board instance.
+ * @param board1 The board to deallocate.
+ */
 void free_board(struct board* board1);
 
 int get_cell(struct board board1, int x, int y);
