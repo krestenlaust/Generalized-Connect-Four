@@ -1,3 +1,4 @@
+#pragma once
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -5,6 +6,10 @@ struct board{
     int width;
     int height;
     int* cells;
+};
+
+struct rules{
+    int line_size;
 };
 
 /**
