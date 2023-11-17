@@ -23,9 +23,6 @@ void game_of_lines(struct board board1, struct rules rules1, game_visualizer vis
     printf("Player %d won!", the_winner);
 }
 
-void evaluate_settings(struct game_settings settings, struct board** out_board, struct rules** out_rules){
-}
-
 void play_game(get_settings settings_getter) {
     struct game_settings settings = settings_getter();
 
