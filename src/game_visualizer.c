@@ -32,18 +32,23 @@ char* render_board_console(struct board board1) {
     }
 
     // Footer
-    for (int x = 0; x < output_line_width; ++x) {
-        output[x + output_line_width * board1.height] = '_';
+    for (int x = 0; x < output_line_width - 1; ++x) {
+        output[output_line_width * board1.height + x] = '_';
+
+        if (x % 2 == 1){
+            output[output_line_width * board1.height + x] = '0' + (x + 1) / 2;
+        }
     }
 
+    output[size_of_output - 2] = '\n';
     output[size_of_output - 1] = '\0';
 
     return output;
 }
 
 char* render_rules_console(struct rules rules1) {
-    char* t = malloc(sizeof(char));
-    t[0] = '\0';
+    char* t = calloc(30, sizeof(char));
+    sprintf(t, "Rules:\n- Lines to win: %d\n", rules1.line_size);
     return t;
 }
 

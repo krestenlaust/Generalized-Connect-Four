@@ -1,19 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "game_of_lines.h"
 #include "settings.h"
+#include "game_visualizer.h"
 
 void game_of_lines(struct board board1, struct rules rules1, struct game_settings settings);
 
 int main(void) {
-    int opponent_is_ai, size_of_arena, size_of_win_line;
+    //int opponent_is_ai, size_of_arena, size_of_win_line;
     // scan_settings(...); should prompt the user for
     //  1. whether to play against AI or person,
     //  2. the size of the arena,
     //  3. how long a winning line needs to be.
 
     // Run the game
-    game_of_lines(opponent_is_ai, size_of_arena, size_of_win_line);
+    struct board* board1 = initialize_board(5, 5);
+    struct rules rules1 = {.line_size = 4};
+    game_visualizer_console(*board1, rules1);
+    //game_of_lines(opponent_is_ai, size_of_arena, size_of_win_line);
 
     return 0;
 }
