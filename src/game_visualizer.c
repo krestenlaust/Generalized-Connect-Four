@@ -1,12 +1,5 @@
 #include "game_visualizer.h"
 
-/*
-* The game visualizer interacts with IO to display the game to the user.
- *
- * The following game visualizers should exist:
- * - Console visualizer
-*/
-
 char* render_board_console(struct board board1) {
     int output_line_width = board1.width * 2 + 2; // |x|x|x|x|\n
     int output_height = board1.height + 1;

@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include "game_of_lines.h"
 
+/*
+* The game visualizer interacts with IO to display the game to the user.
+ *
+ * The following game visualizers should exist:
+ * - Console visualizer
+*/
+
 typedef void (*game_visualizer)(struct board, struct rules);
 
 void game_visualizer_console(struct board board1, struct rules rules1);
