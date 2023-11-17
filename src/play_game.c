@@ -1,43 +1,39 @@
-#include "game_of_lines.h"
-#include "settings.h"
-#include "game_visualizer.h"
+#include "play_game.h"
 
-void game_of_lines(struct board board1, struct rules rules1, struct game_settings settings);
+// Funktionen er flyttet herind for at undgå cirkulære 'dependencies'
+void game_of_lines(struct board board1, struct rules rules1, game_visualizer visualizer) {
 
-int main(void) {
-    //int opponent_is_ai, size_of_arena, size_of_win_line;
-    // scan_settings(...); should prompt the user for
-    //  1. whether to play against AI or person,
-    //  2. the size of the arena,
-    //  3. how long a winning line needs to be.
-
-    // Run the game
-    struct board* board1 = initialize_board(5, 5);
-    struct rules rules1 = {.line_size = 4};
-    game_visualizer_console(*board1, rules1);
-    //game_of_lines(opponent_is_ai, size_of_arena, size_of_win_line);
-
-    return 0;
-}
-
-void game_of_lines(struct board board1, struct rules rules1, struct game_settings settings) {
-    // Create an arena (e.g. use HINT 1)
-
-    int whose_turn = 0;  // Who should perform the next move: Player 0 or Player/Computer 1?
-    int the_winner;
+    int current_turn = 0;
+    int whose_turn = 1;
+    int the_winner = -1;
     do {
+        int move = 0;
         // scan_move(...);
         //     or
         // ai_move(...);
 
-        // update_arena(...);
+        put_column(board1, move, whose_turn);
 
-        // print_arena(...);
+        visualizer(board1, rules1);
 
         // the_winner = winner(...);
 
     } while (the_winner == -1);
 
-    // Print who won (the_winner).
+    printf("Player %d won!", the_winner);
+}
 
+void evaluate_settings(struct game_settings settings, struct board** out_board, struct rules** out_rules){
+}
+
+void play_game(get_settings settings_getter) {
+    struct game_settings settings = settings_getter();
+
+    struct board* board1 = initialize_board(settings.game_size_width, settings.game_size_height);
+    struct rules rules1 = {.line_size = settings.line_size};
+
+    // Use more dependency injection to prevent the function from concerning about implementation details.
+    game_visualizer visualizer = game_visualizer_console;
+
+    game_of_lines(*board1, rules1, visualizer);
 }

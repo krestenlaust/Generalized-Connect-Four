@@ -4,6 +4,9 @@
 
 /**
  * This struct is only used by play_game to represent player input.
+ * Examples of expansion
+ *  - struct game_settings get_settings_args(...);
+ *  - struct game_settings get_settings_file(...);
  */
 struct game_settings {
     bool ai_opponent;
@@ -12,9 +15,9 @@ struct game_settings {
     int line_size;
 };
 
+typedef struct game_settings(*get_settings)(void);
+
 struct game_settings get_settings_scan_console(void);
-// Examples of expansion
-//struct game_settings get_settings_args(void);
-//struct game_settings get_settings_file(void);
+
 
 char* format_settings(struct game_settings settings);

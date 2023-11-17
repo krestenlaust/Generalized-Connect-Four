@@ -1,6 +1,11 @@
 #include "settings.h"
 
 struct game_settings get_settings_scan_console(void){
+    // scan_settings(...); should prompt the user for
+    //  1. whether to play against AI or person,
+    //  2. the size of the arena,
+    //  3. how long a winning line needs to be.
+
     char scan_ai_opponent;
     printf("Play against computer [Y/n]>");
     scanf("%c", &scan_ai_opponent);
