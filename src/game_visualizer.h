@@ -9,15 +9,15 @@
  * - Console visualizer
 */
 
-typedef void (*game_visualizer)(struct board, struct rules);
+typedef void (*game_visualizer)(struct game_board, struct game_rules);
 
-void game_visualizer_console(struct board board1, struct rules rules1);
+void game_visualizer_console(struct game_board board, struct game_rules rules);
 
 /**
- * Renders the board into a null-terminated string.
+ * Renders the game_board into a null-terminated string.
  * NOTE: I don't feel like adding tests for these functions, but it's possible.
- * @param board1 The board to render.
+ * @param board The game_board to render.
  * @return Null-terminated string.
  */
-char* render_board_console(struct board board1);
-char* render_rules_console(struct rules rules1);
+char* render_board_console(struct game_board board);
+char* render_rules_console(struct game_rules rules);

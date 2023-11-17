@@ -1,7 +1,7 @@
 #include "play_game.h"
 
 // Funktionen er flyttet herind for at undgå cirkulære 'dependencies'
-void game_of_lines(struct board board1, struct rules rules1, game_visualizer visualizer) {
+void game_of_lines(struct game_board board, struct game_rules rules, game_visualizer visualizer) {
 
     int current_turn = 0;
     int whose_turn = 1;
@@ -12,9 +12,9 @@ void game_of_lines(struct board board1, struct rules rules1, game_visualizer vis
         //     or
         // ai_move(...);
 
-        put_column(board1, move, whose_turn);
+        put_column(board, move, whose_turn);
 
-        visualizer(board1, rules1);
+        visualizer(board, rules);
 
         // the_winner = winner(...);
 
@@ -26,8 +26,8 @@ void game_of_lines(struct board board1, struct rules rules1, game_visualizer vis
 void play_game(get_settings settings_getter) {
     struct game_settings settings = settings_getter();
 
-    struct board* board1 = initialize_board(settings.game_size_width, settings.game_size_height);
-    struct rules rules1 = {.line_size = settings.line_size};
+    struct game_board* board1 = initialize_board(settings.game_size_width, settings.game_size_height);
+    struct game_rules rules1 = {.line_size = settings.line_size};
 
     // Use more dependency injection to prevent the function from concerning about implementation details.
     game_visualizer visualizer = game_visualizer_console;

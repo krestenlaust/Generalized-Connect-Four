@@ -3,4 +3,4 @@
 #include "game_visualizer.h"
 
 void play_game(get_settings settings_getter);
-void game_of_lines(struct board board1, struct rules rules1, game_visualizer visualizer);
+void game_of_lines(struct game_board board, struct game_rules rules, game_visualizer visualizer);
