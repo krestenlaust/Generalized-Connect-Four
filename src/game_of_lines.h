@@ -1,6 +1,9 @@
 #pragma once
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define EMPTY_CELL (-1)
 
 struct game_board{
     int width;

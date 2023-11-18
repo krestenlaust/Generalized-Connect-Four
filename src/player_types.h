@@ -7,3 +7,10 @@
  * - Console input
  * - Smart AI
  */
+
+#include "game_of_lines.h"
+
+typedef int (*player_agent)(struct game_board board, struct game_rules);
+
+int player_agent_console(struct game_board board, struct game_rules rules);
+int player_agent_random_ai(struct game_board board, struct game_rules rules);
