@@ -22,7 +22,7 @@ void test_initialize_board_zeroes(void){
     struct game_board* board = initialize_board(5, 5);
 
     for (int i = 0; i < 5 * 5; ++i) {
-        assert(board->cells[i] == 0);
+        assert(board->cells[i] == EMPTY_CELL);
     }
 
     free_board(board);
@@ -69,11 +69,11 @@ void test_put_column_empty(void){
 
     assert(column_0 == true);
     assert(cell_0_0_filled == 1);
-    assert(cell_0_1_empty == 0);
+    assert(cell_0_1_empty == EMPTY_CELL);
 
     assert(column_4 == true);
     assert(cell_4_0_filled == 2);
-    assert(cell_4_1_empty == 0);
+    assert(cell_4_1_empty == EMPTY_CELL);
 
     free_board(board);
 }
@@ -95,7 +95,7 @@ void test_put_column_partial_empty(void){
     assert(cell_0_0 == 1);
     assert(cell_0_1 == 1);
     assert(cell_0_2 == 2);
-    assert(cell_0_3_empty == 0);
+    assert(cell_0_3_empty == EMPTY_CELL);
 
     free_board(board);
 }
