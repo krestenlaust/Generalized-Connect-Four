@@ -1,7 +1,7 @@
 #include "play_game.h"
 
 // Funktionen er flyttet herind for at undgå cirkulære 'dependencies'
-void game_of_lines(struct game_board board, struct game_rules rules, game_visualizer visualizer) {
+int game_of_lines(struct game_board board, struct game_rules rules, game_visualizer visualizer) {
 
     int current_turn = 0;
     int whose_turn = 1;
@@ -20,19 +20,21 @@ void game_of_lines(struct game_board board, struct game_rules rules, game_visual
 
     } while (the_winner == -1);
 
-    printf("Player %d won!", the_winner);
+    return the_winner;
 }
 
 void play_game(get_settings settings_getter) {
-    srand(time(NULL))
+    srand(time(NULL));
 
     struct game_settings settings = settings_getter();
 
-    struct game_board* board1 = initialize_board(settings.game_size_width, settings.game_size_height);
-    struct game_rules rules1 = {.line_size = settings.line_size};
+    struct game_board* board = initialize_board(settings.game_size_width, settings.game_size_height);
+    struct game_rules rules = {.line_size = settings.line_size};
 
     // Use more dependency injection to prevent the function from concerning about implementation details.
     game_visualizer visualizer = game_visualizer_console;
 
-    game_of_lines(*board1, rules1, visualizer);
+    int winner = game_of_lines(*board, rules, visualizer);
+
+    printf("Player %d won!", winner);
 }
