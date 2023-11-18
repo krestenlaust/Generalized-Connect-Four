@@ -1,45 +1,47 @@
 #include "game_visualizer.h"
 
 #define WIDTH_PER_CELL 2
+#define DELIMITER_CHAR '|'
+#define EMPTY_CELL_CHAR '_'
+
+char digit_to_char(int digit){
+    return '0' + digit;
+}
 
 char* render_board_console(struct game_board board) {
-    int output_line_width = board.width * WIDTH_PER_CELL + 2; // |x|x|x|x|\n
-    int output_height = board.height + 1;
-    int size_of_output = output_line_width * output_height + 1;
+    int output_line_width = board.width * WIDTH_PER_CELL + 2; // 1 for '|' and 1 for new line
+    int output_height = board.height + 1; // 1 for footer
+    int size_of_output = output_line_width * output_height + 1; // 1 for null-terminator
 
     char* output = malloc(sizeof(char) * size_of_output);
 
     for (int y = 0; y < board.height; ++y) {
-        int array_offset_y = output_line_width * y;
+        int string_row_offset = output_line_width * y;
+
+        output[string_row_offset + board.width * WIDTH_PER_CELL] = DELIMITER_CHAR;
+        output[string_row_offset + board.width * WIDTH_PER_CELL + 1] = '\n';
 
         for (int x = 0; x < board.width; ++x) {
-            int array_offset_x = x * WIDTH_PER_CELL;
-            int array_offset = array_offset_x + array_offset_y;
+            int string_offset = x * WIDTH_PER_CELL + string_row_offset;
 
             int cell_value = get_cell(board, x, board.height - y - 1);
-            char cell_char = '0' + cell_value;
+            char cell_char = digit_to_char(cell_value);
             if (cell_value == EMPTY_CELL){
-                cell_char = '_';
+                cell_char = EMPTY_CELL_CHAR;
             }
 
-            output[array_offset] = '|';
-            output[array_offset + 1] = cell_char;
+            output[string_offset] = DELIMITER_CHAR;
+            output[string_offset + 1] = cell_char;
         }
-
-        output[array_offset_y + board.width * WIDTH_PER_CELL] = '|';
-        output[array_offset_y + board.width * WIDTH_PER_CELL + 1] = '\n';
     }
 
     // Footer
-    for (int x = 0; x < output_line_width - 1; ++x) {
-        char column_char;
-        if (x % WIDTH_PER_CELL == 1){
-            column_char = '0' + ((x + 1) / WIDTH_PER_CELL);
-        }else{
-            column_char = '_';
-        }
+    int footer_string_offset = output_line_width * board.height;
+    for (int x = 0; x < board.width; ++x) {
+        int string_index = x * WIDTH_PER_CELL;
 
-        output[output_line_width * board.height + x] = column_char;
+        output[footer_string_offset + string_index] = ' ';
+        output[footer_string_offset + string_index + 1] = digit_to_char((x + 1) % 10);
     }
 
     output[size_of_output - 2] = '\n';

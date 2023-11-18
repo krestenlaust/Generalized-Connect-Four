@@ -21,3 +21,5 @@ void game_visualizer_console(struct game_board board, struct game_rules rules);
  */
 char* render_board_console(struct game_board board);
 char* render_rules_console(struct game_rules rules);
+
+char digit_to_char(int digit);
