@@ -24,6 +24,8 @@ void game_of_lines(struct game_board board, struct game_rules rules, game_visual
 }
 
 void play_game(get_settings settings_getter) {
+    srand(time(NULL))
+
     struct game_settings settings = settings_getter();
 
     struct game_board* board1 = initialize_board(settings.game_size_width, settings.game_size_height);

@@ -1,3 +1,4 @@
+#include <time.h>
 #include "game_of_lines.h"
 #include "settings.h"
 #include "game_visualizer.h"
