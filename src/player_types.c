@@ -12,14 +12,15 @@ int player_agent_random_ai(struct game_board board, struct game_rules rules){
     const int random_move = rand() % board.width;
     int move = random_move;
 
-    do {
+    while (!put_column(board, move, 1)){
         move = move + 1 % board.width;
 
+        // Detect when no valid moves are available.
         if (move == random_move){
             move = -1;
             break;
         }
-    } while (!put_column(board, move, 1));
+    }
 
     return move;
 }
