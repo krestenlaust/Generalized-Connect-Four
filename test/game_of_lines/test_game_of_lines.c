@@ -4,6 +4,8 @@
 void test_initialize_board_zeroes(void);
 void test_set_cell(void);
 void test_get_cell(void);
+void test_get_cell_outside(void);
+void test_set_cell_outside(void);
 void test_put_column_empty(void);
 void test_put_column_partial_empty(void);
 void test_put_column_full(void);
@@ -12,6 +14,8 @@ int main(void) {
     test_initialize_board_zeroes();
     test_set_cell();
     test_get_cell();
+    test_get_cell_outside();
+    test_set_cell_outside();
 
     test_put_column_empty();
     test_put_column_partial_empty();
@@ -54,6 +58,40 @@ void test_get_cell(void){
     assert(cell_4_4 == 2);
 
     free_board(board1);
+}
+
+/**
+ * This test is to ensure this behavior stays consistent.
+ */
+void test_get_cell_outside(void){
+    struct game_board* board = initialize_board(5, 5);
+
+    int cell_5_5 = get_cell(*board, 5, 5);
+    int cell_minus1_minus1 = get_cell(*board, -1, -1);
+    int cell_3_3 = get_cell(*board, 3, 3);
+
+    assert(cell_5_5 == CELL_NON_EXISTENT);
+    assert(cell_minus1_minus1 == CELL_NON_EXISTENT);
+    assert(cell_3_3 == EMPTY_CELL);
+
+    free_board(board);
+}
+
+/**
+ * This test is to ensure this behavior stays consistent.
+ */
+void test_set_cell_outside(void){
+    struct game_board* board = initialize_board(5, 5);
+
+    bool cell_5_5 = set_cell(*board, 5, 5, 1);
+    bool cell_minus1_minus1 = set_cell(*board, -1, -1, 1);
+    bool cell_3_3 = set_cell(*board, 3, 3, 1);
+
+    assert(cell_5_5 == false);
+    assert(cell_minus1_minus1 == false);
+    assert(cell_3_3 == true);
+
+    free_board(board);
 }
 
 void test_put_column_empty(void){

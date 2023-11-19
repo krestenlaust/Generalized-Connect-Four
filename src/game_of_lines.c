@@ -19,11 +19,20 @@ void free_board(struct game_board* board){
 }
 
 int get_cell(struct game_board board, int x, int y){
+    if (x >= board.width || y >= board.height || y < 0 || x < 0){
+        return CELL_NON_EXISTENT;
+    }
+
     return board.cells[board.width * y + x];
 }
 
-void set_cell(struct game_board board, int x, int y, int value){
+bool set_cell(struct game_board board, int x, int y, int value){
+    if (x >= board.width || y >= board.height || y < 0 || x < 0){
+        return false;
+    }
+
     board.cells[board.width * y + x] = value;
+    return true;
 }
 
 bool put_column(struct game_board board, int x, int value){

@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define EMPTY_CELL (-1)
+#define CELL_NON_EXISTENT (-2)
 
 struct game_board{
     int width;
@@ -29,7 +30,7 @@ struct game_board* initialize_board(int width, int height);
 void free_board(struct game_board* board);
 
 int get_cell(struct game_board board, int x, int y);
-void set_cell(struct game_board board, int x, int y, int value);
+bool set_cell(struct game_board board, int x, int y, int value);
 
 /**
  * Fills the first empty cell in a column.
