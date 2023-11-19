@@ -1,8 +1,10 @@
 #include <assert.h>
 #include "game_visualizer.h"
 
-int main(void) {
+void test_digit_to_char(void);
 
+int main(void) {
+    test_digit_to_char();
 }
 
 void test_digit_to_char(void){

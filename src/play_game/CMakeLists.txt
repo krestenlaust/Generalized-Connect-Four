@@ -3,4 +3,6 @@ add_library(play_game
         settings.c
         settings.h
 )
-target_link_libraries(play_game game_of_lines player_types)
+
+# Dependencies
+target_link_libraries(play_game game_of_lines player_types game_visualizer)
