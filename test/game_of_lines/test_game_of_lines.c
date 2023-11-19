@@ -166,7 +166,7 @@ void test_put_column_full(void){
 }
 
 void test_find_top_filled_row_by_column_test_1(void){
-    struct game_board* board = initialize_board(3, 3);
+    struct game_board* board = initialize_board(1, 3);
     set_cell(*board, 0, 0, 1);
 
     int y = find_top_filled_row_by_column(*board, 0);
@@ -177,9 +177,9 @@ void test_find_top_filled_row_by_column_test_1(void){
 }
 
 void test_find_top_filled_row_by_column_test_2(void){
-    struct game_board* board = initialize_board(3, 3);
-    set_cell(*board, 1, 0, 1);
-    set_cell(*board, 1, 1, 1);
+    struct game_board* board = initialize_board(1, 3);
+    set_cell(*board, 0, 0, 1);
+    set_cell(*board, 0, 1, 1);
 
     int y = find_top_filled_row_by_column(*board, 0);
 
@@ -189,10 +189,10 @@ void test_find_top_filled_row_by_column_test_2(void){
 }
 
 void test_find_top_filled_row_by_column_test_3(void){
-    struct game_board* board = initialize_board(3, 3);
-    set_cell(*board, 1, 0, 1);
-    set_cell(*board, 1, 1, 1);
-    set_cell(*board, 1, 2, 1);
+    struct game_board* board = initialize_board(1, 3);
+    set_cell(*board, 0, 0, 1);
+    set_cell(*board, 0, 1, 1);
+    set_cell(*board, 0, 2, 1);
 
     int y = find_top_filled_row_by_column(*board, 0);
 
