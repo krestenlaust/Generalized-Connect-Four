@@ -6,6 +6,9 @@ void test_set_cell(void);
 void test_get_cell(void);
 void test_get_cell_outside(void);
 void test_set_cell_outside(void);
+void test_find_first_empty_in_column_empty(void);
+void test_find_first_empty_in_column_partial_full(void);
+void test_find_first_empty_in_column_full(void);
 void test_put_column_empty(void);
 void test_put_column_partial_empty(void);
 void test_put_column_full(void);
@@ -22,6 +25,10 @@ int main(void) {
     test_put_column_partial_empty();
     test_put_column_full();
     test_put_column_outside();
+
+    test_find_first_empty_in_column_empty();
+    test_find_first_empty_in_column_partial_full();
+    test_find_first_empty_in_column_full();
 }
 
 void test_initialize_board_zeroes(void){
@@ -96,11 +103,46 @@ void test_set_cell_outside(void){
     free_board(board);
 }
 
+
+void test_find_first_empty_in_column_empty(void){
+    struct game_board* board = initialize_board(1, 3);
+
+    int y = find_first_empty_in_column(*board, 0);
+
+    assert(y == 0);
+
+    free_board(board);
+}
+
+void test_find_first_empty_in_column_partial_full(void){
+    struct game_board* board = initialize_board(1, 3);
+    set_cell(*board, 0, 0, 1);
+
+    int y = find_first_empty_in_column(*board, 0);
+
+    assert(y == 1);
+
+    free_board(board);
+}
+
+void test_find_first_empty_in_column_full(void){
+    struct game_board* board = initialize_board(1, 3);
+    set_cell(*board, 0, 0, 1);
+    set_cell(*board, 0, 1, 1);
+    set_cell(*board, 0, 2, 1);
+
+    int y = find_first_empty_in_column(*board, 0);
+
+    assert(y == CELL_NON_EXISTENT);
+
+    free_board(board);
+}
+
 void test_put_column_outside(void){
     struct game_board* board = initialize_board(5, 5);
 
-    bool column_0_valid = put_column(*board, 0, 1);
-    bool column_5_invalid = put_column(*board, 5, 1);
+    bool column_0_valid = put_column(board, 0, 1);
+    bool column_5_invalid = put_column(board, 5, 1);
 
     assert(column_0_valid == true);
     assert(column_5_invalid == false);
@@ -111,8 +153,8 @@ void test_put_column_outside(void){
 void test_put_column_empty(void){
     struct game_board* board = initialize_board(5, 5);
 
-    bool column_0 = put_column(*board, 0, 1);
-    bool column_4 = put_column(*board, 4, 2);
+    bool column_0 = put_column(board, 0, 1);
+    bool column_4 = put_column(board, 4, 2);
 
     int cell_0_0_filled = get_cell(*board, 0, 0);
     int cell_0_1_empty = get_cell(*board, 0, 1);
@@ -134,8 +176,8 @@ void test_put_column_partial_empty(void){
     struct game_board* board = initialize_board(5, 5);
     set_cell(*board, 0, 0, 1);
 
-    bool column_0_first = put_column(*board, 0, 1);
-    bool column_0_second = put_column(*board, 0, 2);
+    bool column_0_first = put_column(board, 0, 1);
+    bool column_0_second = put_column(board, 0, 2);
 
     int cell_0_0 = get_cell(*board, 0, 0);
     int cell_0_1 = get_cell(*board, 0, 1);
@@ -158,7 +200,7 @@ void test_put_column_full(void){
     set_cell(*board, 0, 1, 1);
     set_cell(*board, 0, 2, 1);
 
-    bool column_0 = put_column(*board, 0, 2);
+    bool column_0 = put_column(board, 0, 2);
 
     int cell_0_0 = get_cell(*board, 0, 0);
     int cell_0_1 = get_cell(*board, 0, 1);

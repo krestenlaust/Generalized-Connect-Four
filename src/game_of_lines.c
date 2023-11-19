@@ -9,6 +9,7 @@ struct game_board* initialize_board(int width, int height){
     board->cells = cells;
     board->width = width;
     board->height = height;
+    board->last_move_x = 0;
 
     return board;
 }
@@ -35,18 +36,28 @@ bool set_cell(struct game_board board, int x, int y, int value){
     return true;
 }
 
-bool put_column(struct game_board board, int x, int value){
-    if (x < 0 || x >= board.width){
+bool put_column(struct game_board* board, int x, int value){
+    int y = find_first_empty_in_column(*board, x);
+
+    if (y == CELL_NON_EXISTENT){
         return false;
+    }
+
+    board->last_move_x = x;
+    return set_cell(*board, x, y, value);
+}
+
+int find_first_empty_in_column(struct game_board board, int x){
+    if (x < 0 || x >= board.width){
+        return CELL_NON_EXISTENT;
     }
 
     // Go from bottom towards top, looking for first empty cell.
     for (int y = 0; y < board.height; ++y) {
-        if (get_cell(board, x, y) == EMPTY_CELL) {
-            set_cell(board, x, y, value);
-            return true;
+        if (get_cell(board, x, y) == EMPTY_CELL){
+            return y;
         }
     }
 
-    return false;
+    return CELL_NON_EXISTENT;
 }
