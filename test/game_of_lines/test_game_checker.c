@@ -18,9 +18,9 @@ int main(void) {
 
 void assert_game_checker_horisontal_win(game_checker checker){
     int board_setup[] = {
-            EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL,
+            EMPTY_CELL, 2, 1, 2, 1,
             EMPTY_CELL, 1, 1, 1, 1,
-            EMPTY_CELL, 2, 1, 2, 2
+            EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL
     };
 
     struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
@@ -63,9 +63,9 @@ void assert_game_checker_empty(game_checker checker){
 
 void assert_game_checker_diagonal_1(game_checker checker){
     int board_setup[] = {
-            EMPTY_CELL, 1, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL,
+            EMPTY_CELL, 2, 2, 1, EMPTY_CELL,
             EMPTY_CELL, 2, 1, EMPTY_CELL, EMPTY_CELL,
-            EMPTY_CELL, 2, 2, 1, EMPTY_CELL
+            EMPTY_CELL, 1, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL
     };
 
     struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
@@ -78,9 +78,9 @@ void assert_game_checker_diagonal_1(game_checker checker){
 
 void assert_game_checker_diagonal_2(game_checker checker){
     int board_setup[] = {
-            EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, 1, EMPTY_CELL,
+            EMPTY_CELL, 1, 2, 2, EMPTY_CELL,
             EMPTY_CELL, EMPTY_CELL, 1, 2, EMPTY_CELL,
-            EMPTY_CELL, 1, 2, 2, EMPTY_CELL
+            EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, 1, EMPTY_CELL
     };
 
     struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
