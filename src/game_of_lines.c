@@ -48,6 +48,10 @@ bool put_column(struct game_board* board, int x, int value){
 }
 
 int find_first_empty_in_column(struct game_board board, int x){
+    if (x < 0 || x >= board.width){
+        return CELL_NON_EXISTENT;
+    }
+
     // Go from bottom towards top, looking for first empty cell.
     for (int y = 0; y < board.height; ++y) {
         if (get_cell(board, x, y) == EMPTY_CELL){
