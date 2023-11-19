@@ -42,3 +42,11 @@ bool set_cell(struct game_board board, int x, int y, int value);
  * @return Whether the column was empty and the value could be set.
  */
 bool put_column(struct game_board board, int x, int value);
+
+/**
+ * Finds the uppermost token, by column.
+ * @param board The board to loop through.
+ * @param x The column.
+ * @return The y-value of the found token.
+ */
+int find_top_filled_row_by_column(struct game_board board, int x);

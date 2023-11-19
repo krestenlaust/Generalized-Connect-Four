@@ -9,6 +9,9 @@ void test_set_cell_outside(void);
 void test_put_column_empty(void);
 void test_put_column_partial_empty(void);
 void test_put_column_full(void);
+void test_find_top_filled_row_by_column_test_1(void);
+void test_find_top_filled_row_by_column_test_2(void);
+void test_find_top_filled_row_by_column_test_3(void);
 
 int main(void) {
     test_initialize_board_zeroes();
@@ -20,6 +23,10 @@ int main(void) {
     test_put_column_empty();
     test_put_column_partial_empty();
     test_put_column_full();
+
+    test_find_top_filled_row_by_column_test_1();
+    test_find_top_filled_row_by_column_test_2();
+    test_find_top_filled_row_by_column_test_3();
 }
 
 void test_initialize_board_zeroes(void){
@@ -154,6 +161,42 @@ void test_put_column_full(void){
     assert(cell_0_0 == 1);
     assert(cell_0_1 == 1);
     assert(cell_0_2 == 1);
+
+    free_board(board);
+}
+
+void test_find_top_filled_row_by_column_test_1(void){
+    struct game_board* board = initialize_board(3, 3);
+    set_cell(*board, 0, 0, 1);
+
+    int y = find_top_filled_row_by_column(*board, 0);
+
+    assert(y == 0);
+
+    free_board(board);
+}
+
+void test_find_top_filled_row_by_column_test_2(void){
+    struct game_board* board = initialize_board(3, 3);
+    set_cell(*board, 1, 0, 1);
+    set_cell(*board, 1, 1, 1);
+
+    int y = find_top_filled_row_by_column(*board, 0);
+
+    assert(y == 1);
+
+    free_board(board);
+}
+
+void test_find_top_filled_row_by_column_test_3(void){
+    struct game_board* board = initialize_board(3, 3);
+    set_cell(*board, 1, 0, 1);
+    set_cell(*board, 1, 1, 1);
+    set_cell(*board, 1, 2, 1);
+
+    int y = find_top_filled_row_by_column(*board, 0);
+
+    assert(y == 2);
 
     free_board(board);
 }
