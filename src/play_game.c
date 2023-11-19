@@ -11,7 +11,7 @@ int game_of_lines(struct game_board board, struct game_rules rules, player_agent
         player_agent current_player = players[whose_turn];
         int move = current_player(board, rules);
 
-        put_column(board, move, whose_turn);
+        put_column(&board, move, whose_turn);
 
         visualizer(board, rules);
 

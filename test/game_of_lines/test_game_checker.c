@@ -23,7 +23,7 @@ void assert_game_checker_horisontal_win(game_checker checker){
             EMPTY_CELL, 2, 1, 2, 2
     };
 
-    struct game_board board = {.width = 5, .height = 3, .cells = board_setup};
+    struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
     struct game_rules rules = {.line_size = 4};
 
     int winner = checker(board, rules);
@@ -38,7 +38,7 @@ void assert_game_checker_vertical_win(game_checker checker){
             EMPTY_CELL, 1, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL
     };
 
-    struct game_board board = {.width = 5, .height = 3, .cells = board_setup};
+    struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 1};
     struct game_rules rules = {.line_size = 3};
 
     int winner = checker(board, rules);
@@ -53,7 +53,7 @@ void assert_game_checker_empty(game_checker checker){
             EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL
     };
 
-    struct game_board board = {.width = 5, .height = 3, .cells = board_setup};
+    struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 0};
     struct game_rules rules = {.line_size = 3};
 
     int winner = checker(board, rules);
@@ -68,7 +68,7 @@ void assert_game_checker_diagonal_1(game_checker checker){
             EMPTY_CELL, 2, 2, 1, EMPTY_CELL
     };
 
-    struct game_board board = {.width = 5, .height = 3, .cells = board_setup};
+    struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
     struct game_rules rules = {.line_size = 3};
 
     int winner = checker(board, rules);
@@ -83,7 +83,7 @@ void assert_game_checker_diagonal_2(game_checker checker){
             EMPTY_CELL, 1, 2, 2, EMPTY_CELL
     };
 
-    struct game_board board = {.width = 5, .height = 3, .cells = board_setup};
+    struct game_board board = {.width = 5, .height = 3, .cells = board_setup, .last_move_x = 2};
     struct game_rules rules = {.line_size = 3};
 
     int winner = checker(board, rules);
