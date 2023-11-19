@@ -1,4 +1,4 @@
-#include "play_game.h"
+#include "play_game/play_game.h"
 
 int main(void) {
     // Run the game
