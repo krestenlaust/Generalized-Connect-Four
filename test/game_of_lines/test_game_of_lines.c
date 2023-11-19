@@ -9,6 +9,7 @@ void test_set_cell_outside(void);
 void test_put_column_empty(void);
 void test_put_column_partial_empty(void);
 void test_put_column_full(void);
+void test_put_column_outside(void);
 void test_find_first_empty_in_column_empty(void);
 void test_find_first_empty_in_column_partial_full(void);
 void test_find_first_empty_in_column_full(void);
@@ -23,6 +24,7 @@ int main(void) {
     test_put_column_empty();
     test_put_column_partial_empty();
     test_put_column_full();
+    test_put_column_outside();
 
     test_find_first_empty_in_column_empty();
     test_find_first_empty_in_column_partial_full();
@@ -97,6 +99,18 @@ void test_set_cell_outside(void){
     assert(cell_5_5 == false);
     assert(cell_minus1_minus1 == false);
     assert(cell_3_3 == true);
+
+    free_board(board);
+}
+
+void test_put_column_outside(void){
+    struct game_board* board = initialize_board(5, 5);
+
+    bool column_0_valid = put_column(*board, 0, 1);
+    bool column_5_invalid = put_column(*board, 5, 1);
+
+    assert(column_0_valid == true);
+    assert(column_5_invalid == false);
 
     free_board(board);
 }
