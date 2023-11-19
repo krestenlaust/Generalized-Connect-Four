@@ -13,7 +13,7 @@ int player_agent_random_ai(struct game_board board, struct game_rules rules){
     const int random_move = rand() % board.width;
     int move = random_move;
 
-    while (!put_column(board, move, 1)){
+    while (find_first_empty_in_column(board, move) == CELL_NON_EXISTENT){
         move = move + 1 % board.width;
 
         // Detect when no valid moves are available.
