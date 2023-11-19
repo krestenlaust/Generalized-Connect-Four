@@ -9,9 +9,9 @@ void test_set_cell_outside(void);
 void test_put_column_empty(void);
 void test_put_column_partial_empty(void);
 void test_put_column_full(void);
-void test_find_top_filled_row_by_column_test_1(void);
-void test_find_top_filled_row_by_column_test_2(void);
-void test_find_top_filled_row_by_column_test_3(void);
+void test_find_first_empty_in_column_empty(void);
+void test_find_first_empty_in_column_partial_full(void);
+void test_find_first_empty_in_column_full(void);
 
 int main(void) {
     test_initialize_board_zeroes();
@@ -24,9 +24,9 @@ int main(void) {
     test_put_column_partial_empty();
     test_put_column_full();
 
-    test_find_top_filled_row_by_column_test_1();
-    test_find_top_filled_row_by_column_test_2();
-    test_find_top_filled_row_by_column_test_3();
+    test_find_first_empty_in_column_empty();
+    test_find_first_empty_in_column_partial_full();
+    test_find_first_empty_in_column_full();
 }
 
 void test_initialize_board_zeroes(void){
@@ -165,38 +165,36 @@ void test_put_column_full(void){
     free_board(board);
 }
 
-void test_find_top_filled_row_by_column_test_1(void){
+void test_find_first_empty_in_column_empty(void){
     struct game_board* board = initialize_board(1, 3);
-    set_cell(*board, 0, 0, 1);
 
-    int y = find_top_filled_row_by_column(*board, 0);
+    int y = find_first_empty_in_column(*board, 0);
 
     assert(y == 0);
 
     free_board(board);
 }
 
-void test_find_top_filled_row_by_column_test_2(void){
+void test_find_first_empty_in_column_partial_full(void){
     struct game_board* board = initialize_board(1, 3);
     set_cell(*board, 0, 0, 1);
-    set_cell(*board, 0, 1, 1);
 
-    int y = find_top_filled_row_by_column(*board, 0);
+    int y = find_first_empty_in_column(*board, 0);
 
     assert(y == 1);
 
     free_board(board);
 }
 
-void test_find_top_filled_row_by_column_test_3(void){
+void test_find_first_empty_in_column_full(void){
     struct game_board* board = initialize_board(1, 3);
     set_cell(*board, 0, 0, 1);
     set_cell(*board, 0, 1, 1);
     set_cell(*board, 0, 2, 1);
 
-    int y = find_top_filled_row_by_column(*board, 0);
+    int y = find_first_empty_in_column(*board, 0);
 
-    assert(y == 2);
+    assert(y == CELL_NON_EXISTENT);
 
     free_board(board);
 }

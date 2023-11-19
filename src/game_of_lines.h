@@ -49,4 +49,4 @@ bool put_column(struct game_board board, int x, int value);
  * @param x The column.
  * @return The y-value of the found token.
  */
-int find_top_filled_row_by_column(struct game_board board, int x);
+int find_first_empty_in_column(struct game_board board, int x);
