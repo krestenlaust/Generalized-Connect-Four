@@ -58,6 +58,10 @@ char* render_rules_console(struct game_rules rules) {
 }
 
 void game_visualizer_console(struct game_board board, struct game_rules rules) {
-    printf("%s\n", render_rules_console(rules));
-    printf("%s\n", render_board_console(board));
+    char* rules_render = render_rules_console(rules);
+    char* board_render = render_board_console(board);
+
+    printf("%s\n%s\n", rules_render, board_render);
+    free(rules_render);
+    free(board_render);
 }
