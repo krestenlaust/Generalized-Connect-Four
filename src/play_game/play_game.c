@@ -36,7 +36,7 @@ void play_game(get_settings settings_getter) {
     // Setup player agents
     player_agent players[2];
     players[0] = player_agent_console;
-    players[1] = settings.ai_opponent ? player_agent_random_ai : player_agent_console;
+    players[1] = settings.ai_opponent ? player_agent_minimax_ai : player_agent_console;
 
     // Use more dependency injection to prevent the function from concerning about implementation details.
     game_visualizer visualizer = game_visualizer_console;

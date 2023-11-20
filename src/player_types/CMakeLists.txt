@@ -2,6 +2,8 @@
 add_library(player_types
         player_types.c
         player_types.h
+        minimax_player.c
+        minimax_player.h
 )
 target_include_directories(player_types PUBLIC .)
 

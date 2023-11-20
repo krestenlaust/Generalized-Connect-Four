@@ -3,6 +3,7 @@
 #include "game_visualizer.h"
 #include "game_checkers.h"
 #include "player_types.h"
+#include "minimax_player.h"
 #include "settings.h"
 
 void play_game(get_settings settings_getter);
