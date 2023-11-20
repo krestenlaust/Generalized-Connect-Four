@@ -44,6 +44,7 @@ char* render_board_console(struct game_board board) {
         output[footer_string_offset + string_index + 1] = digit_to_char((x + 1) % 10);
     }
 
+    output[size_of_output - 3] = ' ';
     output[size_of_output - 2] = '\n';
     output[size_of_output - 1] = '\0';
 
