@@ -9,7 +9,8 @@
 
 #include "game_of_lines.h"
 
-#define NO_PLAYER (-1)
+#define NOT_FINISHED (-1)
+#define DRAW (-2)
 
 typedef int (*game_checker) (struct game_board board, struct game_rules rules);
 

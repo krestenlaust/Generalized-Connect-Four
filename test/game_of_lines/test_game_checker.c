@@ -6,6 +6,7 @@ void test_nearest_slots_vertical_win(void);
 void test_nearest_slots_empty(void);
 void test_nearest_slots_diagonal_1(void);
 void test_nearest_slots_diagonal_2(void);
+void test_nearest_slots_draw(void);
 
 // Write unit tests!
 int main(void) {
@@ -14,6 +15,7 @@ int main(void) {
     test_nearest_slots_empty();
     test_nearest_slots_diagonal_1();
     test_nearest_slots_diagonal_2();
+    test_nearest_slots_draw();
 }
 
 void assert_game_checker_horisontal_win(game_checker checker){
@@ -58,7 +60,7 @@ void assert_game_checker_empty(game_checker checker){
 
     int winner = checker(board, rules);
 
-    assert(winner == NO_PLAYER);
+    assert(winner == NOT_FINISHED);
 }
 
 void assert_game_checker_diagonal_1(game_checker checker){
@@ -91,6 +93,21 @@ void assert_game_checker_diagonal_2(game_checker checker){
     assert(winner == 1);
 }
 
+void assert_game_checker_draw(game_checker checker){
+    int board_setup[] = {
+            1, 2, 1, 2,
+            1, 2, 1, 2,
+            1, 2, 1, 2
+    };
+
+    struct game_board board = {.width = 4, .height = 3, .cells = board_setup, .last_move_x = 0};
+    struct game_rules rules = {.line_size = 4};
+
+    int winner = checker(board, rules);
+
+    assert(winner == DRAW);
+}
+
 void test_nearest_slots_horisontal_win(void){
     assert_game_checker_horisontal_win(game_checker_nearest_slots);
 }
@@ -109,4 +126,8 @@ void test_nearest_slots_diagonal_1(void){
 
 void test_nearest_slots_diagonal_2(void){
     assert_game_checker_diagonal_2(game_checker_nearest_slots);
+}
+
+void test_nearest_slots_draw(void){
+    assert_game_checker_draw(game_checker_nearest_slots);
 }

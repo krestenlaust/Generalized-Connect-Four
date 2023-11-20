@@ -19,6 +19,16 @@ int count_consecutive_value(struct game_board board, int x, int y, int direction
     return 1 + count_consecutive_value(board, new_x, new_y, direction_x, direction_y, value);
 }
 
+bool is_board_full(struct game_board board){
+    for (int i = 0; i < board.width; ++i) {
+        if (find_first_empty_in_column(board, i) != CELL_NON_EXISTENT){
+            return false;
+        }
+    }
+
+    return true;
+}
+
 int game_checker_nearest_slots(struct game_board board, struct game_rules rules){
     int x = board.last_move_x;
     int y = find_first_empty_in_column(board, x);
@@ -31,12 +41,12 @@ int game_checker_nearest_slots(struct game_board board, struct game_rules rules)
     }
 
     if (x < 0 || x >= board.width || y < 0 || y >= board.height){
-        return NO_PLAYER;
+        return NOT_FINISHED;
     }
 
     int search_value = get_cell(board, x, y);
     if (search_value == CELL_NON_EXISTENT){
-        return NO_PLAYER;
+        return NOT_FINISHED;
     }
 
     // Check diagonals and horisontal
@@ -57,5 +67,9 @@ int game_checker_nearest_slots(struct game_board board, struct game_rules rules)
         return search_value;
     }
 
-    return NO_PLAYER;
+    if (is_board_full(board)){
+        return DRAW;
+    }
+
+    return NOT_FINISHED;
 }

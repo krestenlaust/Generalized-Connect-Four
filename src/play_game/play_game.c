@@ -3,7 +3,7 @@
 // Funktionen er flyttet herind for at undgå cirkulære 'dependencies'
 int game_of_lines(struct game_board board, struct game_rules rules, player_agent* players, int player_count, game_visualizer visualizer, game_checker checker) {
     int turns = -1;
-    int the_winner = NO_PLAYER;
+    int the_winner = NOT_FINISHED;
     do {
         turns++;
         int whose_turn = turns % player_count;
@@ -17,7 +17,7 @@ int game_of_lines(struct game_board board, struct game_rules rules, player_agent
 
         the_winner = checker(board, rules);
 
-    } while (the_winner == NO_PLAYER);
+    } while (the_winner == NOT_FINISHED);
 
     return the_winner;
 }
@@ -26,6 +26,7 @@ void play_game(get_settings settings_getter) {
     srand(time(NULL));
 
     struct game_settings settings = settings_getter();
+    printf("You've entered the following settings:\n%s\n", format_settings(settings));
 
     struct game_board* board = initialize_board(settings.game_size_width, settings.game_size_height);
     struct game_rules rules = {.line_size = settings.line_size};
@@ -42,5 +43,9 @@ void play_game(get_settings settings_getter) {
     int winner = game_of_lines(*board, rules, players, 2, visualizer, checker);
     free_board(board);
 
-    printf("Player %d won!", winner);
+    if (winner == DRAW){
+        printf("\nGame ended in draw!");
+    }else{
+        printf("\nPlayer %d won!", winner);
+    }
 }
