@@ -26,7 +26,9 @@ void play_game(get_settings settings_getter) {
     srand(time(NULL));
 
     struct game_settings settings = settings_getter();
-    printf("You've entered the following settings:\n%s\n", format_settings(settings));
+    char* formatted_settings = format_settings(settings);
+    printf("You've entered the following settings:\n%s\n", formatted_settings);
+    free(formatted_settings);
 
     struct game_board* board = initialize_board(settings.game_size_width, settings.game_size_height);
     struct game_rules rules = {.line_size = settings.line_size};

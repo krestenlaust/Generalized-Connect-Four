@@ -40,7 +40,7 @@ struct game_settings get_settings_scan_console(void){
 
 char* format_settings(struct game_settings settings){
     // Rough estimate of string length.
-    char* settings_string = calloc(45, sizeof(char));
+    char* settings_string = calloc(50, sizeof(char));
 
     sprintf(settings_string, "AI opponent:\t%d\nBoard size:\t%d X %d\nLine size:\t%d",
             settings.ai_opponent,
