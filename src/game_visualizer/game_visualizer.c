@@ -5,7 +5,8 @@
 #define EMPTY_CELL_CHAR '_'
 
 char digit_to_char(int digit){
-    return '0' + digit;
+    // Explicit casting to avoid implementation-defined behavior.
+    return (char)((int)'0' + digit);
 }
 
 char* render_board_console(struct game_board board) {
